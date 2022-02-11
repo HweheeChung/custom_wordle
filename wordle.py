@@ -1,5 +1,5 @@
 from termcolor import colored
-from PyDictionary import PyDictionary
+from english_words import english_words_set
 import os, sys
 
 
@@ -11,12 +11,6 @@ def blockPrint():
 def enablePrint():
     sys.stdout = sys.__stdout__
 
-def check_word(dictionary, word):
-    blockPrint()
-    ret = dictionary.meaning(word)
-    enablePrint()
-    return type(ret) == dict()
-
 def list_replace(ls, old, new):
     for i, l in enumerate(ls):
         if l == old:
@@ -25,7 +19,6 @@ def list_replace(ls, old, new):
 
 print(colored('custom', 'red'), colored('wordle', 'green'))
 
-dictionary = PyDictionary()
 
 answer = 'house'
 
@@ -39,7 +32,7 @@ for i in range(5):
         inp = input('##: ')
         if len(inp) != 5:
             print('input should be a 5-length word')
-        elif check_word(dictionary, inp):
+        elif not inp in english_words_set:
             print('input is not a word')
         else:
             flg = False
