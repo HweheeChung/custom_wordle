@@ -73,7 +73,6 @@ candidate_msg = st.empty()
 
 for i in range(6):
     cnt = 0
-    flg = True
     status_str = 'Status(TRIAL: {}/6): '.format(i+1)
 
     text_input_container = st.empty()
@@ -82,7 +81,7 @@ for i in range(6):
         ''.join(candidates[0:13] + ['<br>'] + candidates[13:]) # for mobile
     candidate_msg.markdown(candidate_str, unsafe_allow_html=True)
 
-    while flg:
+    while True:
         inp = text_input_container.text_input(label='type 5-length word ', key=i, max_chars=5)
         inp = inp.upper()
         if inp == '':
@@ -95,7 +94,7 @@ for i in range(6):
             text_input_container.empty()
             colored_inp, cnt, candidates = check_word(inp, answer, candidates)
             text_input_container.markdown('<__'+colored_inp+'__>', unsafe_allow_html=True)
-            flg = False
+            break
     if cnt == 5:
         status_msg.success(status_str + 'Success')
         st.balloons()
